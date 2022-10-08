@@ -1,23 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {useState} from 'react'
+import Banner from './components/Banner';
+import Form from './components/Form';
+import ListContext from './components/ListContext';
+import MovieProvider from './MovieContext';
 
 function App() {
+const [theme, setTheme]=useState('dark')
+const toogleTheme= ()=> {
+  setTheme(theme === 'dark' ? 'light': 'dark' )
+}
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={theme}>
+     <MovieProvider>
+      <button onClick={toogleTheme}>{theme == 'dark' ? 'light': 'dark'}</button>
+      <Form />
+      <Banner />
+      <ListContext/>
+     </MovieProvider>
     </div>
   );
 }
